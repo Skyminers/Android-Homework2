@@ -1,16 +1,16 @@
 package com.example.smalltiktok
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.DividerItemDecoration
+import android.widget.Button
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL
 import androidx.recyclerview.widget.RecyclerView
 import com.example.smalltiktok.recycler.*
 
-class MainActivity : AppCompatActivity(),MsgAdapter.IOnItemClickListener, IconsAdapter.IOnItemClickListener{
+class MainActivity : Activity(),MsgAdapter.IOnItemClickListener, IconsAdapter.IOnItemClickListener{
     private val TAG = "MainActivityLog"
     private var msgRecycler: RecyclerView? = null
     private var msgAdapter: MsgAdapter? = null
@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity(),MsgAdapter.IOnItemClickListener, IconsA
 
     private fun initView() {
         val appInfo = applicationInfo
+        val buttonContact = findViewById<Button>(R.id.buttonContact)
 
         msgRecycler = findViewById(R.id.msgRecycler)
         msgAdapter = MsgAdapter(MsgDataSet.getData(resources.getIdentifier("circle","mipmap",appInfo.packageName)))
@@ -46,8 +47,12 @@ class MainActivity : AppCompatActivity(),MsgAdapter.IOnItemClickListener, IconsA
         iconsRecycler!!.adapter = iconsAdapter
 
         Log.i(TAG,"add Item Decoration")
-        msgRecycler!!.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
-        iconsRecycler!!.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.HORIZONTAL))
+        //msgRecycler!!.addItemDecoration(LinearItemDecoration(resources.getColor(R.color.itemLine)))
+
+        buttonContact.setOnClickListener {
+            Log.i(TAG,"click 'Contact' button")
+            Toast.makeText(this@MainActivity,"按下了联系人按钮",Toast.LENGTH_SHORT).show()
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

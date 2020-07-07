@@ -1,5 +1,7 @@
 <resources>
-    <string name="app_name">SmallTiktok</string>
+    <string name="app_name">消息</string>
     <string name="test_string">烫烫烫烫烫烫烫烫烫烫烫烫</string>
     <string name="short_test_string">烫烫</string>
+    <string name="contact">联系人</string>
+    <string name="message">消息</string>
 </resources>

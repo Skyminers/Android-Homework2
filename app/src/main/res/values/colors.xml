@@ -6,5 +6,6 @@
     <color name="messageBackground">#000022</color>
     <color name="white">#EEFFFF</color>
     <color name="gray">#A39292</color>
+    <color name="itemLine">#706F6F</color>
 
 </resources>
