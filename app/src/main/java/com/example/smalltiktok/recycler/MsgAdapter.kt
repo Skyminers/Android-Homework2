@@ -12,8 +12,8 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.smalltiktok.R
 import java.util.*
 
-class MyAdapter(myDataset: List<MsgData>?) :
-    RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
+class MsgAdapter(myDataset: List<MsgData>?) :
+    RecyclerView.Adapter<MsgAdapter.MyViewHolder>() {
     private val mDataset: MutableList<MsgData>? = ArrayList<MsgData>()
     private var mItemClickListener: IOnItemClickListener? = null
 
