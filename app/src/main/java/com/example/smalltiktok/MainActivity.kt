@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.smalltiktok.recycler.*
@@ -22,7 +23,9 @@ class MainActivity : Activity(),MsgAdapter.IOnItemClickListener, IconsAdapter.IO
     private var iconsAdapter: IconsAdapter? = null
     private var iconslayoutManager: RecyclerView.LayoutManager? = null
 
-    fun countViewNumbers(view : View?):Int {
+    private var itemTouchHelper : ItemTouchHelper? = null
+
+    private fun countViewNumbers(view : View?):Int {
         if(view == null) return 0
         var c = 1
         if (view is ViewGroup) {
@@ -51,9 +54,21 @@ class MainActivity : Activity(),MsgAdapter.IOnItemClickListener, IconsAdapter.IO
         iconsRecycler!!.setHasFixedSize(true)
         iconsRecycler!!.layoutManager = iconslayoutManager
 
-        Log.i(TAG,"set Listener")
+        Log.i(TAG,"set Item Click Listener")
         msgAdapter!!.setOnItemClickListener(this)
         iconsAdapter!!.setOnItemClickListener(this)
+
+        Log.i(TAG,"set Drag Listener")
+        msgAdapter!!.onItemDragListener = (object : MsgAdapter.OnItemDragListener {
+            override fun onDrag(holder: MsgAdapter.MyViewHolder) {
+                itemTouchHelper?.startDrag(holder)
+            }
+        })
+
+        val callback = ItemTouchHelperCallback(msgAdapter!!,this)
+        itemTouchHelper = ItemTouchHelper(callback)
+
+        itemTouchHelper?.attachToRecyclerView(msgRecycler)
 
         Log.i(TAG,"set Adapter")
         msgRecycler!!.adapter = msgAdapter

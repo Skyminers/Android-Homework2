@@ -1,18 +1,20 @@
 package com.example.smalltiktok.recycler
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnLongClickListener
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.smalltiktok.R
 import java.util.*
 
 class MsgAdapter(myDataset: List<MsgData>?) :
-    RecyclerView.Adapter<MsgAdapter.MyViewHolder>() {
+    RecyclerView.Adapter<MsgAdapter.MyViewHolder>(), ItemTouchAdapter{
     private val mDataset: MutableList<MsgData>? = ArrayList<MsgData>()
     private var mItemClickListener: IOnItemClickListener? = null
 
@@ -45,6 +47,12 @@ class MsgAdapter(myDataset: List<MsgData>?) :
 
     fun setOnItemClickListener(listener: IOnItemClickListener?) {
         mItemClickListener = listener
+    }
+
+    var onItemDragListener : OnItemDragListener? = null
+
+    interface OnItemDragListener {
+        fun onDrag(holder: MyViewHolder)
     }
 
     fun addData(position: Int, data: MsgData) {
@@ -105,5 +113,16 @@ class MsgAdapter(myDataset: List<MsgData>?) :
 
     init {
         mDataset!!.addAll(myDataset!!)
+    }
+
+    override fun onItemDismiss(position: Int) {
+        if (null != mDataset && mDataset.size > position) {
+            mDataset.removeAt(position)
+            notifyItemRemoved(position)
+            if (position != mDataset.size) {
+                //刷新改变位置item下方的所有Item的位置,避免索引错乱
+                notifyItemRangeChanged(position, mDataset.size - position)
+            }
+        }
     }
 }
