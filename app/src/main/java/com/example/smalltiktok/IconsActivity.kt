@@ -5,16 +5,16 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
 
-class MsgActivity : Activity() {
+class IconsActivity : Activity() {
 
-    private val TAG = "MsgActivityLog"
+    private val TAG = "IconsActivityLog"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_msg_details)
+        setContentView(R.layout.activity_icons_details)
         Log.i(TAG,"Start a new Activity")
         val intent = intent
-        val text = "Msg Item ID : ${intent.getIntExtra("itemNumber-Msg",-1)}"
+        val text = "Icons Item ID : ${intent.getIntExtra("itemNumber-Icons",-1)}"
         val textView = findViewById<TextView>(R.id.textView)
         Log.i(TAG,"get $text")
         textView.text = text

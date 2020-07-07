@@ -1,6 +1,5 @@
 package com.example.smalltiktok.recycler
 
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnLongClickListener
@@ -74,7 +73,7 @@ class MsgAdapter(myDataset: List<MsgData>?) :
     ): MyViewHolder {
         return MyViewHolder(
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.recycler_item, parent, false)
+                .inflate(R.layout.msg_recycler_item, parent, false)
         )
     }
 
