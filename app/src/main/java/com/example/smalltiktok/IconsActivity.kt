@@ -14,7 +14,7 @@ class IconsActivity : Activity() {
         setContentView(R.layout.activity_icons_details)
         Log.i(TAG,"Start a new Activity")
         val intent = intent
-        val text = "Icons Item ID : ${intent.getIntExtra("itemNumber-Icons",-1)}"
+        val text = "Icons Item Name : ${intent.getStringExtra("itemNumber-Icons")}"
         val textView = findViewById<TextView>(R.id.textView)
         Log.i(TAG,"get $text")
         textView.text = text

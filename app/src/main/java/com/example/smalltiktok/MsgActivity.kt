@@ -14,7 +14,7 @@ class MsgActivity : Activity() {
         setContentView(R.layout.activity_msg_details)
         Log.i(TAG,"Start a new Activity")
         val intent = intent
-        val text = "Msg Item ID : ${intent.getIntExtra("itemNumber-Msg",-1)}"
+        val text = "Msg Item Name : ${intent.getStringExtra("itemNumber-Msg")}"
         val textView = findViewById<TextView>(R.id.textView)
         Log.i(TAG,"get $text")
         textView.text = text

@@ -7,13 +7,8 @@ object IconsDataSet {
             IconsData("赞",ID),
             IconsData("@我的",ID),
             IconsData("评论",ID),
-            IconsData("标题4",ID),
-            IconsData("标题5",ID),
-            IconsData("标题6",ID),
-            IconsData("标题7",ID),
-            IconsData("标题8",ID),
-            IconsData("标题9",ID),
-            IconsData("标题10",ID)
+            IconsData("留言板",ID),
+            IconsData("举报记录",ID)
         )
     }
 }

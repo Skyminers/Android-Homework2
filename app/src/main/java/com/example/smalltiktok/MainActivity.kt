@@ -4,6 +4,8 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,6 +21,17 @@ class MainActivity : Activity(),MsgAdapter.IOnItemClickListener, IconsAdapter.IO
     private var iconsRecycler: RecyclerView? = null
     private var iconsAdapter: IconsAdapter? = null
     private var iconslayoutManager: RecyclerView.LayoutManager? = null
+
+    fun countViewNumbers(view : View?):Int {
+        if(view == null) return 0
+        var c = 1
+        if (view is ViewGroup) {
+            for(i in 0 until view.childCount ){
+                c += countViewNumbers(view.getChildAt(i))
+            }
+        }
+        return c
+    }
 
     private fun initView() {
         val appInfo = applicationInfo
@@ -60,6 +73,8 @@ class MainActivity : Activity(),MsgAdapter.IOnItemClickListener, IconsAdapter.IO
         setContentView(R.layout.activity_main)
         Log.i(TAG,"RecyclerViewActivity onCreate")
         initView()
+        val numbers = countViewNumbers(findViewById(R.id.mainActivity))
+        Log.i(TAG,"The main activity contains $numbers views")
     }
 
     override fun onStart() {
@@ -77,7 +92,7 @@ class MainActivity : Activity(),MsgAdapter.IOnItemClickListener, IconsAdapter.IO
         Log.i(TAG,"Click Msg $position item")
         val intent = Intent(this, MsgActivity::class.java)
         Log.i(TAG,"put key-value (\"itemNumber-Msg\",$position) in intent")
-        intent.putExtra("itemNumber-Msg",position)
+        intent.putExtra("itemNumber-Msg",data?.title)
         startActivity(intent)
     }
 
@@ -85,7 +100,7 @@ class MainActivity : Activity(),MsgAdapter.IOnItemClickListener, IconsAdapter.IO
         Log.i(TAG,"Click Icons $position item")
         val intent = Intent(this, IconsActivity::class.java)
         Log.i(TAG,"put key-value (\"itemNumber-Icons\",$position) in intent")
-        intent.putExtra("itemNumber-Icons",position)
+        intent.putExtra("itemNumber-Icons",data?.title)
         startActivity(intent)
     }
 
