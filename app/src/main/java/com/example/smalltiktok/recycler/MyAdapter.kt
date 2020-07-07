@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnLongClickListener
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
@@ -21,11 +22,13 @@ class MyAdapter(myDataset: List<MsgData>?) :
         private val msgTitle: TextView = contentView.findViewById(R.id.title)
         private val msgContent: TextView = contentView.findViewById(R.id.content)
         private val msgSendTime: TextView = contentView.findViewById(R.id.sendTime)
+        private val msgUserImage: ImageView = contentView.findViewById(R.id.imageView)
 
         fun onBind(position: Int, data: MsgData) {
             msgTitle.text = data.title
             msgContent.text = data.content
             msgSendTime.text = data.time
+            msgUserImage.setImageResource(data.imageID)
         }
 
         fun setOnClickListener(listener: View.OnClickListener?) {
@@ -92,7 +95,6 @@ class MyAdapter(myDataset: List<MsgData>?) :
             false
         })
     }
-
     override fun getItemCount(): Int {
         return mDataset!!.size
     }

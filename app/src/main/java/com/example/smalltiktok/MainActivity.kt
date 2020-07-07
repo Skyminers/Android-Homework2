@@ -12,20 +12,28 @@ import com.example.smalltiktok.recycler.MsgDataSet
 import com.example.smalltiktok.recycler.MyAdapter
 
 class MainActivity : AppCompatActivity(),MyAdapter.IOnItemClickListener{
-    private val TAG = "MainActivity"
-
-    private var msgRecycler: RecyclerView = findViewById(R.id.msgRecycler)
-    private var mAdapter: MyAdapter = MyAdapter(MsgDataSet.getData())
-    private var layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(this)
+    private val TAG = "MainActivityLogTag"
+    private var msgRecycler: RecyclerView? = null
+    private var mAdapter: MyAdapter? = null
+    private var layoutManager: RecyclerView.LayoutManager? = null
 
     private fun initView() {
+        val appInfo = applicationInfo
 
-        msgRecycler.setHasFixedSize(true)
-        msgRecycler.layoutManager = layoutManager
+        msgRecycler = findViewById(R.id.msgRecycler)
+        mAdapter = MyAdapter(MsgDataSet.getData(resources.getIdentifier("circle","mipmap",appInfo.packageName)))
+        layoutManager = LinearLayoutManager(this)
 
-        mAdapter.setOnItemClickListener(this)
-        msgRecycler.adapter = mAdapter
-        msgRecycler.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
+        msgRecycler!!.setHasFixedSize(true)
+        msgRecycler!!.layoutManager = layoutManager
+        Log.i(TAG,"set Listener")
+        mAdapter!!.setOnItemClickListener(this)
+
+        Log.i(TAG,"set Adapter")
+        msgRecycler!!.adapter = mAdapter
+
+        Log.i(TAG,"add Item Decoration")
+        msgRecycler!!.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
 
     }
 
@@ -48,14 +56,13 @@ class MainActivity : AppCompatActivity(),MyAdapter.IOnItemClickListener{
 
 
     override fun onItemCLick(position: Int, data: MsgData?) {
-        Toast.makeText(this@MainActivity, "点击了第" + position + "条", Toast.LENGTH_SHORT)
-            .show()
+
+        //Toast.makeText(this@MainActivity, "点击了第" + position + "条", Toast.LENGTH_SHORT).show()
         //mAdapter.addData(position + 1, MsgData("新增头条", "0w"))
     }
 
     override fun onItemLongCLick(position: Int, data: MsgData?) {
-        Toast.makeText(this@MainActivity, "长按了第" + position + "条", Toast.LENGTH_SHORT)
-            .show()
+        //Toast.makeText(this@MainActivity, "长按了第" + position + "条", Toast.LENGTH_SHORT).show()
         //mAdapter.removeData(position)
     }
 }
